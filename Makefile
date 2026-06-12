@@ -1,14 +1,14 @@
 .PHONY: populate-db
 populate-db:
-	poetry run python xlsx_to_sqlite.py --excel chaves_de_acesso.xlsx --db chaves_de_acesso.db --sheets "Planilha1"
+	poetry run python code/xlsx_to_sqlite.py --excel chaves_de_acesso.xlsx --db chaves_de_acesso.db --sheets "Planilha1"
 
 .PHONY: push-chaves
 push-chaves:
-	poetry run python push_chaves.py --db chaves_de_acesso.db --column "Chave NF-e" --update --wait 1.0
+	poetry run python code/push_chaves.py --db chaves_de_acesso.db --column "Chave NF-e" --update --wait 1.0
 
 .PHONY: fetch-xml
 fetch-xml:
-	poetry run python fetch_xml.py --db chaves_de_acesso.db --column "Chave NF-e" --update --wait 1.0
+	poetry run python code/fetch_xml.py --db chaves_de_acesso.db --column "Chave NF-e" --update --wait 1.0
 
 .PHONY: help
 help:

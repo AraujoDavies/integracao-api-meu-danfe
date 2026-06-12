@@ -45,7 +45,10 @@ Arquivos importantes
 - `xlsx_to_sqlite.py` — converte planilha(s) para `chaves_de_acesso.db`.
 - `push_chaves.py` — faz PUT para `https://api.meudanfe.com.br/v2/fd/add/{key}` e atualiza `status_api`/`retorno_api`.
 - `fetch_xml.py` — faz GET para `https://api.meudanfe.com.br/v2/fd/get/xml/{key}`, grava XML em `arquivos_xml/` e atualiza a DB.
-- `Makefile` — alvos que encapsulam os comandos (ver exemplos abaixo).
+-- `Makefile` — alvos que encapsulam os comandos (ver exemplos abaixo).
+
+Local dos scripts
+- Observação: alguns usuários organizam os scripts dentro da pasta `code/`. Se os arquivos estiverem em `code/`, execute-os prefixando o caminho, por exemplo `python code/xlsx_to_sqlite.py`. Os exemplos neste README funcionam tanto com os scripts na raiz quanto em `code/` — ajuste os caminhos/Makefile conforme sua organização.
 
 Uso (exemplos)
 
@@ -65,6 +68,8 @@ make fetch-xml
 Chamadas diretas (sem Makefile)
 
 ```bash
+cd code
+
 # 1) Converter Excel -> SQLite
 python xlsx_to_sqlite.py --excel chaves_de_acesso.xlsx --db chaves_de_acesso.db --sheets "Planilha1"
 

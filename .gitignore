@@ -1,5 +1,5 @@
 .env
-chaves_de_acesso.db
-chaves_de_acesso.xlsx
+*.db
+*.xlsx
 *.rar
 *.xml

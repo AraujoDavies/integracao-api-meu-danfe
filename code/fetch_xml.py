@@ -78,17 +78,21 @@ def fetch_and_store(db_path: str, table: str, chave_col: str, wait_seconds: floa
                 try:
                     # Save XML to arquivos_xml using filename from response when available
                     try:
-                        base_dir = os.path.dirname(os.path.abspath(__file__))
-                        out_dir = os.path.join(base_dir, "arquivos_xml")
-                        os.makedirs(out_dir, exist_ok=True)
+                        # Determine project root: if this script is in a `code/` folder,
+                        # use its parent as project root; otherwise use the script's folder.
+                        from pathlib import Path
+
+                        script_dir = Path(__file__).resolve().parent
+                        project_root = script_dir.parent if script_dir.name == "code" else script_dir
+                        out_dir = project_root / "arquivos_xml"
+                        out_dir.mkdir(parents=True, exist_ok=True)
 
                         if not filename:
                             raise SystemExit("Filename not found")
-                        fname = filename
-                        fname = os.path.basename(fname)
+                        fname = Path(filename).name
                         if not fname.lower().endswith(".xml"):
                             fname = f"{fname}.xml"
-                        file_path = os.path.join(out_dir, fname)
+                        file_path = out_dir / fname
                         with open(file_path, "w", encoding="utf-8") as fh:
                             fh.write(xml_value or "")
                         logging.info("Wrote XML to %s", file_path)
